@@ -2,6 +2,8 @@
 
 ## 📖 Project Overview
 This project implements an **end-to-end data pipeline** for the [Olist Brazilian E-commerce dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce).  
+
+
 It demonstrates:
 - **Data ingestion** into PostgreSQL
 - **Cleaning & transformation** with Python (pandas + SQLAlchemy)
@@ -70,8 +72,19 @@ olist_pipeline/
 │   ├── load_data.py        # ETL script with cleaning
 │   └── requirements.txt    # Python dependencies
 │
-├── docker/
-│   └── Dockerfile.superset # Superset custom config (optional)
+├── sql/
+│   └── 00_create_schemas.sql
+│   └── 01_dim_customers.sql
+│   └── 02_dim_sellers.sql
+│   └── 03_dim_products.sql
+│   └── 04_dim_date.sql
+│   └── 10_vw_payments_agg.sql
+│   └── 11_vw_reviews_latest.sql
+│   └── 12_vw_fct_order_items.sql
+│   └── 13_vw_fct_orders.sql
+│   └── 20_vw_monthly_sales.sql
+│   └── 21_vw_category_sales.sql
+│   └── 22_vw_delivery_performance.sql
 │
 ├── superset/
 │   ├── docker-init.sh      # Init script for Superset

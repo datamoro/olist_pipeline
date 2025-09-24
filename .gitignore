@@ -1,1 +1,45 @@
-/.vscode
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env
+secrets.env
+
+# CSVs / Dados
+data/*.csv
+*.zip
+
+# Jupyter
+*.ipynb_checkpoints/
+
+# Superset
+superset_home/
+*.db
+
+# Logs
+*.log
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# Docker
+*.pid
+
+# Ambiente virtual
+.venv/
+
+# Dados sensíveis
+.env
+
+# SQLite do Superset (se for mantido)
+superset_home/superset.db
+
+# Pycache e logs
+__pycache__/
+*.pyc
+*.log
+
+# VSCode
+.vscode/
