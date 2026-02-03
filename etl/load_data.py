@@ -1,5 +1,5 @@
 import pandas as pd
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import os
 import argparse
 
@@ -62,6 +62,7 @@ def main():
     data_path = args.data_path
     files = [f for f in os.listdir(data_path) if f.endswith(".csv")]
 
+    # Process each CSV file
     for file in files:
         table_name = file.replace(".csv", "")
         file_path = os.path.join(data_path, file)
@@ -70,6 +71,12 @@ def main():
         # Read and clean
         df = pd.read_csv(file_path)
         df = clean_dataframe(df)
+
+        # Drop table with CASCADE to handle dependent views
+        drop_query = text(f"DROP TABLE IF EXISTS {args.schema}.{table_name} CASCADE")
+        with engine.connect() as conn:
+            conn.execute(drop_query)
+            conn.commit()
 
         # Load into PostgreSQL
         df.to_sql(table_name, engine, schema=args.schema, if_exists="replace", index=False)

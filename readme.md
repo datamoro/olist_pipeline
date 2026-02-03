@@ -120,11 +120,11 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 python load_data.py \
-  --user <db_user> \
-  --password <db_password> \
-  --host <db_host> \
-  --port <db_port> \
-  --database <db_name> \
+  --user olist \
+  --password olist123 \
+  --host localhost \
+  --port 5432 \
+  --database olist_db \
   --schema raw \
   --data-path ../data/
 ~~~
