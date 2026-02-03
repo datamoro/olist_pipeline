@@ -1,0 +1,10 @@
+FROM apache/superset:3.0.0
+
+USER root
+RUN pip install psycopg2-binary
+
+COPY superset/superset_config.py /app/pythonpath/superset_config.py
+COPY superset/docker-init.sh /app/docker-init.sh
+RUN chmod +x /app/docker-init.sh
+
+ENTRYPOINT ["/app/docker-init.sh"]

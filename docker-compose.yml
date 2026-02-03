@@ -13,6 +13,7 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
 
   superset:
     image: apache/superset:3.0.0
@@ -39,7 +40,9 @@ services:
       - ./superset/superset_config.py:/app/pythonpath/superset_config.py
       - ./superset/docker-init.sh:/app/docker-init.sh
       - ./sql:/sql
+      - ./superset_home:/app/superset_home
     entrypoint: ["/app/docker-init.sh"]
 
 volumes:
   pgdata:
+  superset_home:
