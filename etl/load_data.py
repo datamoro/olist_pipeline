@@ -9,13 +9,17 @@ import argparse
 def get_args():
     parser = argparse.ArgumentParser(description="Clean and load Olist CSV data into PostgreSQL")
 
+    # Default path relative to script location
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    default_data_path = os.path.join(script_dir, "../data/")
+
     parser.add_argument("--host", default="localhost", help="PostgreSQL host (default: localhost)")
     parser.add_argument("--port", default="5432", help="PostgreSQL port (default: 5432)")
     parser.add_argument("--user", required=True, help="PostgreSQL user")
     parser.add_argument("--password", required=True, help="PostgreSQL password")
     parser.add_argument("--database", default="olist_db", help="PostgreSQL database name (default: olist_db)")
     parser.add_argument("--schema", default="raw", help="PostgreSQL schema for raw data (default: raw)")
-    parser.add_argument("--data-path", default="../data/", help="Path to directory containing CSV files")
+    parser.add_argument("--data-path", default=default_data_path, help="Path to directory containing CSV files")
 
     return parser.parse_args()
 
