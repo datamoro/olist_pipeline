@@ -37,11 +37,11 @@ SELECT
   pa.payment_methods,
   -- Derived metric
   (o.order_delivered_customer_date::date - o.order_purchase_timestamp::date) AS delivery_days
-FROM olist_order_items_dataset oi
-JOIN olist_orders_dataset o ON o.order_id = oi.order_id
-LEFT JOIN olist_customers_dataset c ON c.customer_id = o.customer_id
-LEFT JOIN olist_sellers_dataset s ON s.seller_id = oi.seller_id
-LEFT JOIN olist_products_dataset pr ON pr.product_id = oi.product_id
-LEFT JOIN product_category_name_translation t ON t.product_category_name = pr.product_category_name
+FROM raw.olist_order_items_dataset oi
+JOIN raw.olist_orders_dataset o ON o.order_id = oi.order_id
+LEFT JOIN raw.olist_customers_dataset c ON c.customer_id = o.customer_id
+LEFT JOIN raw.olist_sellers_dataset s ON s.seller_id = oi.seller_id
+LEFT JOIN raw.olist_products_dataset pr ON pr.product_id = oi.product_id
+LEFT JOIN raw.product_category_name_translation t ON t.product_category_name = pr.product_category_name
 LEFT JOIN analytics.vw_reviews_latest rl ON rl.order_id = o.order_id
 LEFT JOIN analytics.vw_payments_agg pa ON pa.order_id = o.order_id;

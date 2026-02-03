@@ -14,6 +14,7 @@ def get_args():
     parser.add_argument("--user", required=True, help="PostgreSQL user")
     parser.add_argument("--password", required=True, help="PostgreSQL password")
     parser.add_argument("--database", default="olist_db", help="PostgreSQL database name (default: olist_db)")
+    parser.add_argument("--schema", default="raw", help="PostgreSQL schema for raw data (default: raw)")
     parser.add_argument("--data-path", default="../data/", help="Path to directory containing CSV files")
 
     return parser.parse_args()
@@ -60,14 +61,14 @@ def main():
     for file in files:
         table_name = file.replace(".csv", "")
         file_path = os.path.join(data_path, file)
-        print(f"\n Processing: {file} → Table: olist.{table_name}")
+        print(f"\n Processing: {file} → Table: {args.schema}.{table_name}")
 
         # Read and clean
         df = pd.read_csv(file_path)
         df = clean_dataframe(df)
 
         # Load into PostgreSQL
-        df.to_sql(table_name, engine,schema='olist', if_exists="replace", index=False)
+        df.to_sql(table_name, engine, schema=args.schema, if_exists="replace", index=False)
         print(f"Loaded: {table_name} ({df.shape[0]} rows)")
 
     print("\n All files loaded successfully.")

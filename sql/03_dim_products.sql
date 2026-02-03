@@ -10,6 +10,6 @@ SELECT DISTINCT
   p.product_length_cm,
   p.product_height_cm,
   p.product_width_cm
-FROM olist_products_dataset p
-LEFT JOIN product_category_name_translation t
+FROM raw.olist_products_dataset p
+LEFT JOIN raw.product_category_name_translation t
   ON t.product_category_name = p.product_category_name;

@@ -1,7 +1,7 @@
 CREATE OR REPLACE VIEW analytics.dim_date AS
 WITH d AS (
   SELECT DISTINCT (o.order_purchase_timestamp::date) AS dt
-  FROM olist_orders_dataset o
+  FROM raw.olist_orders_dataset o
   WHERE o.order_purchase_timestamp IS NOT NULL
 )
 SELECT

@@ -7,7 +7,7 @@ WITH ranked AS (
       ORDER BY r.review_creation_date DESC NULLS LAST,
                r.review_answer_timestamp DESC NULLS LAST
     ) AS rn
-  FROM olist_order_reviews_dataset r
+  FROM raw.olist_order_reviews_dataset r
 )
 SELECT
   order_id,

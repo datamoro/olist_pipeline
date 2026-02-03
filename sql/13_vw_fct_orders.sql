@@ -5,7 +5,7 @@ WITH items AS (
     COUNT(*) AS items_count,
     SUM(oi.price) AS items_revenue,
     SUM(oi.freight_value) AS freight_revenue
-  FROM olist_order_items_dataset oi
+  FROM raw.olist_order_items_dataset oi
   GROUP BY oi.order_id
 )
 SELECT
@@ -31,8 +31,8 @@ SELECT
   rl.review_score,
   -- Derived
   (o.order_delivered_customer_date::date - o.order_purchase_timestamp::date) AS delivery_days
-FROM olist_orders_dataset o
-LEFT JOIN olist_customers_dataset c ON c.customer_id = o.customer_id
+FROM raw.olist_orders_dataset o
+LEFT JOIN raw.olist_customers_dataset c ON c.customer_id = o.customer_id
 LEFT JOIN items it ON it.order_id = o.order_id
 LEFT JOIN analytics.vw_payments_agg pa ON pa.order_id = o.order_id
 LEFT JOIN analytics.vw_reviews_latest rl ON rl.order_id = o.order_id;
